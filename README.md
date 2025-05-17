@@ -1,55 +1,76 @@
-# Segmentation-and-Calcium-Transience
+# 🧪 Segmentation and Mean Fluorescence Analysis
 
-This Python-based project provides an automated solution for analyzing fluorescence microscopy data. It enables **segmentation** of biological structures (such as cells or nuclei) and the calculation of **mean fluorescence intensity** within each segmented region. The tool is designed for ease of use with a **Tkinter GUI**, allowing users to select files, process them, and visualize the results.
+This project is a Python-based tool for performing **cell segmentation and quantification of mean fluorescence intensity** from microscopy video files (including `.nd2` files). It uses the **Cellpose deep learning model** for segmentation and supports a user-friendly **Tkinter GUI** for input selection.
 
+---
 
-### 📊 Features
+## 🎯 Key Features
 
-- **Segmentation**: Automatically segments biological structures using intensity thresholding and region labeling techniques.
-- **Mean Fluorescence Calculation**: Computes the mean fluorescence intensity for each segmented region.
-- **Batch Processing**: Supports processing of multiple `.csv` files, making it suitable for high-throughput experiments.
-- **GUI Interface**: A simple and interactive graphical user interface for file selection and displaying results.
-- **Output**: Results are saved as Excel files for easy sharing and further analysis.
+- 📁 **Video Input Support**: Accepts `.nd2` files or standard video formats.
+- 🔬 **Brightest Frame Detection**: Automatically selects the brightest frame for mask generation.
+- 🧠 **Deep Learning Segmentation**: Uses the pretrained `cyto` model from Cellpose.
+- 📈 **Fluorescence Quantification**: Calculates mean fluorescence intensity for each segmented cell over time.
+- 📝 **CSV Export**: Saves results in a structured CSV file (`cell_id × frames`).
+- 🖼️ **Frame & Mask Export**: Saves segmented overlays and masks for each frame.
+- 📊 **Optional Plotting**: Offers post-processing plots of fluorescence traces for each cell.
+- 🖱️ **GUI Input**: Simple user interface for parameter input via `Tkinter`.
 
+---
 
-### ⚙️ Installation
+## 🚀 Example Workflow
 
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/your-username/segmentation-mean-fluorescence.git
-2. Install the required Python libraries:
-   ```bash
-   pip install -r requirements.txt
-3. Run the script via the terminal or use the GUI interface:
-   ```bash
-   python segmentation_mean_fluorescence.py
+1. User selects input file via GUI and provides:
+   - Cell diameter
+   - Output CSV filename
+   - Fluorescence channel index
+2. Code:
+   - Detects the brightest frame and uses it for segmentation
+   - Processes each frame to apply the saved mask
+   - Calculates mean fluorescence for each detected cell
+   - Saves results to CSV
+3. Optionally, fluorescence traces for each cell are plotted.
 
+---
 
-🧰 Technologies Used:
+## 📂 Output Structure
 
-  •	Python for scripting and image analysis
-  •	NumPy, Pandas for data manipulation and analysis
-	•	OpenCV for image processing tasks (if applicable)
-	•	Tkinter for building the graphical user interface
-	•	Matplotlib for data visualization (optional)
+- `cellpose_segmented_frames/`: Overlaid frames with contours
+- `mask_####.png`: Binary masks for each frame
+- `<your_filename>.csv`: Output with rows as cell IDs and columns as frame-wise mean intensities
 
+---
 
-🎯 Use Case
+## ⚙️ Installation
 
-This tool is particularly useful for researchers in fields like cell biology, microbiology, and bioimaging who need to quantify fluorescence intensities from microscopy images. It is ideal for experiments measuring protein expression or cell activity using fluorescence markers.
+### 1. Clone the repository
+```bash
+git clone https://github.com/snehaag006/segmentation-mean-fluorescence.git
+cd segmentation-mean-fluorescence
+```
 
+###2. Install dependencies
+```bash
+pip install -r requirements.txt
+```
+📌 Note: Tkinter comes bundled with most Python installations. If you face issues on Linux, install via sudo apt install python3-tk.
 
-📈 Example Workflow
-	1.	Input: Import fluorescence microscopy data saved in .csv format (e.g., exported from Fiji/ImageJ).
-	2.	Segmentation: The tool segments the regions of interest based on intensity thresholds.
-	3.	Quantification: It calculates the mean fluorescence intensity for each segmented region.
-	4.	Output: Results are saved to an Excel file, including the segmented regions and their corresponding fluorescence intensities.
+🧪 Sample Input (Optional)
 
+You can test the script with .nd2 files exported from imaging software such as Nikon NIS-Elements or standard .mp4/.avi videos converted from microscopy software.
 
-📝 Contributing
+🧠 Technologies Used
+	•	Python 3
+	•	Cellpose for segmentation
+	•	NumPy & Pandas for analysis
+	•	OpenCV for image processing
+	•	Matplotlib for plotting
+	•	Tkinter for GUI input
+	•	ND2Reader for .nd2 file handling
 
-Feel free to fork this repository, submit issues, or open pull requests for improvements or bug fixes.
+ 🙌 Contributions
 
-📄 License
+Contributions are welcome! Feel free to fork this repo, submit issues, or open pull requests to improve functionality or compatibility.
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+✨ Acknowledgements
+	•	Cellpose for the segmentation model
+	•	ND2Reader for .nd2 file support
