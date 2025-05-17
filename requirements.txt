@@ -1,0 +1,6 @@
+opencv-python
+numpy
+pandas
+matplotlib
+cellpose
+nd2reader
